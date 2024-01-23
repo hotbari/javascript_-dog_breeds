@@ -7,7 +7,7 @@ const header = document.getElementById("header")
 const main = document.getElementById("main")
 const input = document.getElementById("input")
 const button = document.getElementById("button")
-const select = document.getElementById("select")
+const select = document.getElementById("filter-select")
 
 const currentDogs = []
 
@@ -26,5 +26,18 @@ window.addEventListener("load",function(){
         })
     })
     request1.send()
+
+    // 셀렉트에 견종정보 뿌리기 (all->견종 정보 추가)
+    request2.open("get", apiAllBreeds)
+    request2.addEventListener("load", function(){
+        const response = JSON.parse(request2.response)
+        Object.keys(response.message).forEach(function(item){
+            const option = document.createElement("option")
+            option.textContent = item
+            option.value = item
+            select.appendChild(option)
+        })
+    })
+    request2.send()
 
 })
