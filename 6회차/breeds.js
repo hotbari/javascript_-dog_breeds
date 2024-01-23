@@ -11,6 +11,14 @@ const select = document.getElementById("filter-select")
 
 const currentDogs = []
 
+function dpdogs(item){
+    const dogImgDiv = document.createElement("div")
+    dogImgDiv.classList.add("flex-item")
+    dogImgDiv.innerHTML = `
+    <img src=${item}>`
+    main.appendChild(dogImgDiv)
+}
+
 window.addEventListener("load",function(){
     // 강쥐 사진 뿌리기
     request1.open("get", apiRandomDOg)
@@ -18,11 +26,7 @@ window.addEventListener("load",function(){
         const response = JSON.parse(request1.response)
         response.message.forEach(function(item){
             currentDogs.push(item)
-            const dogImgDiv = document.createElement("div")
-            dogImgDiv.classList.add("flex-item")
-            dogImgDiv.innerHTML = `
-            <img src=${item}>`
-            main.appendChild(dogImgDiv)
+            dpdogs(item)
         })
     })
     request1.send()
@@ -53,11 +57,19 @@ button.addEventListener("click", function(){
     input.value = ""
 
     filteredDogs.forEach(function(item){
-            currentDogs.push(item)
-            const dogImgDiv = document.createElement("div")
-            dogImgDiv.classList.add("flex-item")
-            dogImgDiv.innerHTML = `
-            <img src=${item}>`
-            main.appendChild(dogImgDiv)
+            dpdogs(item)
+        })
+    })
+
+    select.addEventListener("change", function(){
+        main.innerHTML=""
+    let filteredDogs = currentDogs.filter(function(item){
+        return item.indexOf(select.value) !== -1
+    }) 
+
+    input.value = ""
+
+    filteredDogs.forEach(function(item){
+            dpdogs(item)
         })
     })
