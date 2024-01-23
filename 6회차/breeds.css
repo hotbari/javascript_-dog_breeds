@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 html, body{
@@ -45,4 +46,28 @@ main{
 img {
     width: 200px;
     height: 200px;
+}
+
+.more, .tothetop {
+    width: 60px;
+    height: 60px;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    cursor: pointer;
+}
+.more{
+    color: #FFFFFF;
+    background-color: orange;
+    left: 100px;
+    bottom: 100px;
+}
+
+.tothetop {
+    color: #FFFFFF;
+    background-color: orangered;
+    right: 100px;
+    bottom: 100px;
 }

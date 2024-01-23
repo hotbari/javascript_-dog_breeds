@@ -8,6 +8,10 @@ const main = document.getElementById("main")
 const input = document.getElementById("filter-text")
 const button = document.getElementById("filter-button")
 const select = document.getElementById("filter-select")
+const more = document.getElementById("more")
+const tothetop = document.getElementById("tothetop")
+const resetBtn = document.getElementById("reset")
+
 
 const currentDogs = []
 
@@ -72,4 +76,34 @@ button.addEventListener("click", function(){
     filteredDogs.forEach(function(item){
             dpdogs(item)
         })
+    })
+
+    more.addEventListener("click", function(){
+        request1.open("get", apiRandomDOg)
+        request1.addEventListener("load",function(){
+            const response = JSON.parse(request1.response)
+            response.message.forEach(function(item){
+                currentDogs.push(item)
+                dpdogs(item)
+            })
+        })
+        request1.send()
+    })
+
+    tothetop.addEventListener("click", function(){
+        //scrollTo() 주어진 위치로 스크롤 이동
+        window.scrollTo({ top:0 })
+    })
+
+    resetBtn.addEventListener("click", function(){
+        main.innerHTML = ""
+        request1.open("get", apiRandomDOg)
+        request1.addEventListener("load", function(){
+        const response = JSON.parse(request1.response)
+        response.message.forEach(function(item){
+            currentDogs.push(item)
+            dpdogs(item)
+        })
+    })
+    request1.send()
     })
