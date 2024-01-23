@@ -19,6 +19,9 @@ window.addEventListener("load",function(){
         response.message.forEach(function(item){
             currentDogs.push(item)
             const dogImgDiv = document.createElement("div")
+            dogImgDiv.classList.add("flex-item")
+            dogImgDiv.innerHTML = `
+            <img src=${item}>`
             main.appendChild(dogImgDiv)
         })
     })
