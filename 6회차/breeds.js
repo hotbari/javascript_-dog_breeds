@@ -5,8 +5,8 @@ const request2 = new XMLHttpRequest()
 
 const header = document.getElementById("header")
 const main = document.getElementById("main")
-const input = document.getElementById("input")
-const button = document.getElementById("button")
+const input = document.getElementById("filter-text")
+const button = document.getElementById("filter-button")
 const select = document.getElementById("filter-select")
 
 const currentDogs = []
@@ -41,3 +41,23 @@ window.addEventListener("load",function(){
     request2.send()
 
 })
+
+
+
+button.addEventListener("click", function(){
+    main.innerHTML=""
+    let filteredDogs = currentDogs.filter(function(item){
+        return item.indexOf(input.value) !== -1
+    }) 
+
+    input.value = ""
+
+    filteredDogs.forEach(function(item){
+            currentDogs.push(item)
+            const dogImgDiv = document.createElement("div")
+            dogImgDiv.classList.add("flex-item")
+            dogImgDiv.innerHTML = `
+            <img src=${item}>`
+            main.appendChild(dogImgDiv)
+        })
+    })
